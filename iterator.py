@@ -61,3 +61,25 @@ class CitiesIterator:
         self._sort_parameter = parameter
         self._reverse_sort = reverse
         self._cities.sort(key=lambda x: getattr(x, parameter), reverse=reverse)
+
+    def __iter__(self) -> Iterator[City]:
+        """Сбрасывает индекс итерации и возвращает итератор."""
+        self._current_index = 0
+        return self
+    
+    def __next__(self) -> City:
+        """Возвращает следующий город, соответствующий фильтрам."""
+        while self._current_index < len(self._cities):
+            city = self._cities[self._current_index]
+            self._current_index += 1
+            
+            if self._min_population is not None and city.population < self._min_population:
+                continue
+                
+            return city
+        raise StopIteration
+
+    def __len__(self) -> int:
+        """Возвращает количество городов."""
+        return len(self._cities)
+    
