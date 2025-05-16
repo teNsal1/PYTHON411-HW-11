@@ -83,3 +83,51 @@ class CitiesIterator:
         """Возвращает количество городов."""
         return len(self._cities)
     
+cities_list = [
+    {
+        "coords": {"lat": "52.65", "lon": "90.08333"},
+        "district": "Сибирский",
+        "name": "Абаза",
+        "population": 14816,
+        "subject": "Хакасия"
+    },
+    {
+        "coords": {"lat": "52.63333", "lon": "91.16667"},
+        "district": "Сибирский",
+        "name": "Абакан",
+        "population": 167489,
+        "subject": "Хакасия"
+    },
+    {
+        "coords": {"lat": "59.93750", "lon": "30.30861"},
+        "district": "Северо-Западный",
+        "name": "Санкт-Петербург",
+        "population": 5384342,
+        "subject": "Санкт-Петербург"
+    },
+    {
+        "coords": {"lat": "55.79639", "lon": "49.10889"},
+        "district": "Приволжский",
+        "name": "Казань",
+        "population": 1257391,
+        "subject": "Татарстан"
+    },
+    {
+        "coords": {"lat": "55.75", "lon": "37.61667"},
+        "district": "Центральный",
+        "name": "Москва",
+        "population": 12655050,
+        "subject": "Москва"
+    }
+]
+
+# Создание итератора
+cities_iterator = CitiesIterator(cities_list)
+
+# Применение фильтра и сортировки
+cities_iterator.set_population_filter(15000)
+cities_iterator.sort_by("name")
+
+# Итерация по городам
+for city in cities_iterator:
+    print(f"{city.name} ({city.population})")
